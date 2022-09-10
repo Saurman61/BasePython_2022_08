@@ -3,9 +3,6 @@
 Функции и структуры данных
 """
 from math import sqrt
-from faker import Faker
-
-fake = Faker()
 
 
 def power_numbers(*args):
@@ -15,7 +12,6 @@ def power_numbers(*args):
     >>> power_numbers(1, 2, 5, 7)
     <<< [1, 4, 25, 49]
     """
-    # list(i**2 for i in args)
     return list(map(lambda x: pow(x, 2), args))
 
 
@@ -30,9 +26,10 @@ def is_prime(num: int):
     if num < 2:
         return False
 
-    for i in range(2, int(sqrt(num))+1):
+    for i in range(2, int(sqrt(num)) + 1):
         if num % i == 0:
             return False
+
     return True
 
 
@@ -48,18 +45,8 @@ def filter_numbers(user_list: list, mask: str):
     <<< [2, 4]
     """
     if mask == EVEN:
-        user_func = lambda x: x % 2 == 0
-
+        return list(filter(lambda x: x % 2 == 0, user_list))
     elif mask == ODD:
-        user_func = lambda x: x % 2 == 1
-
+        return list(filter(lambda x: x % 2 == 1, user_list))
     elif mask == PRIME:
-        user_func = lambda x: is_prime(x)
-
-    return list(filter(user_func, user_list))
-
-
-if __name__ == '__main__':
-    k = fake.pylist(nb_elements=fake.pyint(30, 100), value_types=["int"])
-
-    print(filter_numbers([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 25, 1369], PRIME))
+        return list(filter(lambda x: is_prime(x), user_list))
